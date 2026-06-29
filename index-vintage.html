@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trip Tease · Memory FM</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:#efe9dc;
+  color:#241f1a;
+  font-family:Inter,Helvetica,Arial,sans-serif;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background-image:radial-gradient(rgba(0,0,0,.08) 1px, transparent 1px);
+  background-size:3px 3px;opacity:.18;mix-blend-mode:multiply;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+header{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 28px;background:rgba(239,233,220,.74);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(36,31,26,.12);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+}
+nav{display:flex;gap:24px;color:#6f6558}
+nav a:hover{color:#201a15}
+.logo{font-weight:700;color:#1d1916}
+.hero{
+  min-height:100vh;padding:112px 5vw 58px;
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:end;
+}
+.hero-copy{padding-bottom:7vh;max-width:520px}
+.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#776d61;margin-bottom:24px}
+h1{
+  font-family:Georgia,serif;font-size:clamp(74px,12vw,168px);line-height:.78;
+  letter-spacing:-.095em;font-weight:400;color:#171310;
+}
+.hero-copy p{margin-top:28px;max-width:360px;font-family:Georgia,serif;font-size:20px;line-height:1.2;color:#3d342d}
+.enter{display:inline-flex;gap:16px;align-items:center;margin-top:34px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;border-bottom:1px solid #241f1a;padding-bottom:6px}
+.mood-wall{display:grid;grid-template-columns:1fr .75fr;gap:16px;align-items:end}
+.photo{
+  background:#fff8ec;padding:10px 10px 42px;border-radius:3px;
+  box-shadow:0 30px 80px rgba(56,43,28,.18);
+  position:relative;overflow:hidden;
+}
+.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.08),transparent 40%,rgba(145,91,39,.08));pointer-events:none}
+.photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.86) contrast(.92) sepia(.16)}
+.photo.big{height:68vh;transform:rotate(-1.4deg)}
+.photo.small{height:36vh;transform:rotate(2.2deg);margin-bottom:8vh}
+.tape{position:absolute;width:80px;height:26px;background:rgba(255,248,211,.65);top:14px;left:50%;transform:translateX(-50%) rotate(-2deg);z-index:3;mix-blend-mode:multiply}
+.caption{position:absolute;left:14px;right:14px;bottom:15px;font-family:Georgia,serif;color:#7b6e62;font-size:13px}
+section{padding:74px 5vw;border-top:1px solid rgba(36,31,26,.12)}
+.section-title{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#786c60;margin-bottom:28px}
+.releases{display:grid;grid-template-columns:repeat(5,1fr);gap:22px}
+.card{background:#fff8ec;padding:9px 9px 20px;box-shadow:0 18px 45px rgba(71,54,36,.1);transition:.25s;transform:rotate(var(--r,0deg))}
+.card:hover{transform:translateY(-7px) rotate(var(--r,0deg))}
+.card img{aspect-ratio:1/1;width:100%;object-fit:cover;filter:saturate(.9) contrast(.94) sepia(.08)}
+.card h3{font-family:Georgia,serif;font-size:23px;font-weight:400;letter-spacing:-.04em;margin-top:13px}
+.card p{font-size:12px;color:#776d61;line-height:1.45;margin-top:5px}
+.world-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(36,31,26,.12);border:1px solid rgba(36,31,26,.12)}
+.article{background:#efe9dc;padding:42px;display:grid;grid-template-columns:.75fr 1fr;gap:34px;align-items:center}
+.article figure{background:#fff8ec;padding:9px 9px 35px;box-shadow:0 18px 50px rgba(55,39,22,.12);transform:rotate(-1.2deg)}
+.article:nth-child(2) figure{transform:rotate(1.5deg)}
+.article figure img{aspect-ratio:1/1;object-fit:cover;width:100%;filter:saturate(.84) contrast(.94) sepia(.13)}
+.article h2,.film h2,.studio h2,.bio h2{font-family:Georgia,serif;font-size:clamp(42px,5vw,82px);font-weight:400;letter-spacing:-.075em;line-height:.9;margin-bottom:20px}
+.article p,.film p,.studio p,.bio p{font-family:Georgia,serif;font-size:18px;line-height:1.25;color:#332b25;margin-bottom:16px}
+.meta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#82766a;margin-bottom:18px}
+.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px}.links a{font-size:11px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid #241f1a;padding-bottom:5px}
+.film{display:grid;grid-template-columns:.8fr 1.2fr;gap:54px;align-items:center}
+.video{background:#110f0d;padding:10px;box-shadow:0 24px 70px rgba(36,31,26,.18);transform:rotate(.8deg)}
+.video iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.studio{display:grid;grid-template-columns:1fr .88fr;gap:50px;align-items:center}.studio-photo{background:#fff8ec;padding:10px 10px 38px;box-shadow:0 28px 75px rgba(56,43,28,.16);transform:rotate(-.8deg)}.studio-photo img{height:440px;width:100%;object-fit:cover;filter:saturate(.78) contrast(.92) sepia(.18)}
+.bio{display:grid;grid-template-columns:.45fr 1fr;gap:44px;align-items:center}.portrait{background:#fff8ec;padding:10px 10px 38px;box-shadow:0 24px 65px rgba(56,43,28,.14);transform:rotate(1deg)}.portrait img{height:420px;width:100%;object-fit:cover;filter:grayscale(.1) saturate(.72) contrast(.95) sepia(.12)}
+.footer{display:flex;justify-content:space-between;gap:20px;padding:42px 5vw;color:#786c60;font-size:12px;border-top:1px solid rgba(36,31,26,.12)}
+@media(max-width:980px){.hero,.film,.studio,.bio{grid-template-columns:1fr}.mood-wall{grid-template-columns:1fr}.photo.big,.photo.small{height:auto;margin:0}.photo img{height:auto}.releases{grid-template-columns:repeat(2,1fr)}.world-grid{grid-template-columns:1fr}.article{grid-template-columns:1fr;padding:28px}nav{gap:12px;font-size:10px;overflow:auto}.studio-photo img,.portrait img{height:auto}}
+@media(max-width:600px){header{padding:16px 18px}.hero{padding:96px 22px 50px}.releases{grid-template-columns:1fr}section{padding:58px 22px}.footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="#">Trip Tease</a><nav><a href="#releases">Releases</a><a href="#world">World</a><a href="#film">Film</a><a href="#studio">Studio</a><a href="#bio">Bio</a><a href="#contact">Contact</a></nav></header>
+<main>
+<section class="hero">
+  <div class="hero-copy"><div class="kicker">Memory FM · Romantic Electronics</div><h1>Trip<br>Tease</h1><p>Sounds from intimate club moments, nostalgic machines and dream states. Made for late nights, long drives and rooms with the curtains half open.</p><a class="enter" href="#world">Enter the world <span>↓</span></a></div>
+  <div class="mood-wall"><figure class="photo big"><span class="tape"></span><img src="artjaguar.png" alt="Trip Tease Jaguar artwork"><figcaption class="caption">Private archive, television light, soft danger.</figcaption></figure><figure class="photo small"><span class="tape"></span><img src="studiomex.JPG" alt="Trip Tease studio in Mexico City"><figcaption class="caption">La Roma, machines waiting for the night.</figcaption></figure></div>
+</section>
+<section id="releases"><div class="section-title">Selected releases</div><div class="releases">
+  <article class="card" style="--r:-.8deg"><img src="artjaguar.png" alt="Jaguar"><h3>Jaguar</h3><p>Trip Tease<br>clipp.art · CLIPP257 · 2026</p></article>
+  <article class="card" style="--r:.6deg"><img src="artsexhavingdisco.jpg" alt="Sex Having Disco"><h3>Sex Having Disco</h3><p>Trip Tease & Alain Vice<br>Astrolead · AR121 · 2025</p></article>
+  <article class="card" style="--r:-.4deg"><img src="artsexhavingdisco2.jpeg" alt="Sex Having Disco Pt. 2"><h3>Sex Having Disco, Pt. 2</h3><p>Trip Tease & Alain Vice feat. Lubó<br>Astrolead · AR125 digital · 2025</p></article>
+  <article class="card" style="--r:.9deg"><img src="mirrorsrelease.jpg" alt="Mirrors Remixed"><h3>MIRRORS (REMIXED)</h3><p>DJ Seinfeld · Trip Tease Remix<br>Ninja Tune · 2022</p></article>
+  <article class="card" style="--r:-.6deg"><img src="shadesart.jpg" alt="Shades"><h3>Shades</h3><p>Kris Berle & Trip Tease<br>clipp.art · CLIPP197 · 2021</p></article>
+</div></section>
+<section id="world"><div class="section-title">World</div><div class="world-grid">
+  <article class="article"><figure><img src="artsexhavingdisco2.jpeg" alt="Sex Having Disco Pt. 2"></figure><div><div class="meta">Astrolead Recordings · 2025</div><h2>Sex Having Disco</h2><p>Somewhere between a neon postcard, an empty diner after midnight and a machine dreaming in Italian, <em>Sex Having Disco</em> builds its own private mythology of the dancefloor.</p><p>Italo disco, synth wave, cosmic electronics and late-night romance move through the release without turning into nostalgia. It feels more like a future memory: warm basslines, shiny synths and that strange glamour of dancing at the edge of the night.</p><p>Pt. 2 opens the world further with <em>Milano 2098</em>, featuring Lubó, and a Prins Thomas Diskomiks that stretches the fantasy into a longer, more interstellar trip.</p><div class="links"><a href="https://open.spotify.com/intl-es/album/4TMAFHfvDMwZs7tq2tMowe?si=KtAW1yx4TcmApSN4kimn3A" target="_blank">Listen Pt. 1</a><a href="https://open.spotify.com/intl-es/album/4rnX2LBMpAH0oBVDUPfdaW?si=M8v-VuHsQo-7EVE3CfrKsw" target="_blank">Listen Pt. 2</a></div></div></article>
+  <article class="article"><figure><img src="mirrorsrelease.jpg" alt="Home Calling Trip Tease remix"></figure><div><div class="meta">Ninja Tune · 2022</div><h2>Home Calling</h2><p>Trip Tease's remix of DJ Seinfeld's <em>Home Calling</em> sits inside the <em>MIRRORS (REMIXED)</em> universe, released by Ninja Tune.</p><p>It does not try to overpower the original. It opens another room inside it: romantic, late-night, warm, slightly euphoric, with the feeling of walking home after something important happened.</p><div class="links"><a href="https://open.spotify.com/search/DJ%20Seinfeld%20Home%20Calling%20Trip%20Tease%20Remix" target="_blank">Listen on Spotify</a></div></div></article>
+</div></section>
+<section id="film" class="film"><div><div class="section-title">Film</div><div class="meta">CLIPP.ART · Visual Collaboration</div><h2>Un, Deux, Trois</h2><p>Some songs do not ask for a music video. They ask for another dimension.</p><p>Created with artist Kris Berle, <em>Un, Deux, Trois</em> expands Trip Tease's visual language into dream logic, surreal animation and abstract landscapes. Strange characters become another instrument, extending the emotional world of the music rather than illustrating it.</p><div class="links"><a href="https://www.youtube.com/watch?v=P_VFdGwgbg0" target="_blank">Watch on YouTube</a></div></div><div class="video"><iframe src="https://www.youtube.com/embed/P_VFdGwgbg0" title="Un, Deux, Trois" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></section>
+<section id="studio" class="studio"><figure class="studio-photo"><img src="studiomex.JPG" alt="Trip Tease studio in Mexico City"></figure><div><div class="section-title">Studio</div><h2>La Roma Jams</h2><p>Trip Tease has collected synthesizers for more than twenty years. Today, his studio in Roma, Mexico City houses around one hundred different synths and vintage machines.</p><p>A few Saturdays each month, the doors open for public jams where up to sixty people create music together at the same time. No ego, no fixed script, just machines, curiosity and collective energy.</p><p>The sessions have become part of his mythology in La Roma: part studio ritual, part social experiment, part living archive of electronic sound.</p></div></section>
+<section id="bio" class="bio"><figure class="portrait"><img src="carlossalame.JPG" alt="Carlos Salame Trip Tease"></figure><div><div class="section-title">Bio</div><h2>Carlos Salame</h2><p>Carlos Salame is Trip Tease, a producer, DJ and curator from Mexico City. His music moves between electronic romance, disco memory, lo-fi intimacy and cinematic club textures.</p><p>His releases and collaborations span labels such as clipp.art, Astrolead Recordings and Ninja Tune, with remixes and projects that connect him to artists including DJ Seinfeld, Kris Berle and Alain Vice.</p><p>Beyond records, Trip Tease is a world of images, machines and rituals: synthesizers, surreal animation, late-night jams and songs that feel like old photographs of the future.</p></div></section>
+</main>
+<footer id="contact" class="footer"><div>© Trip Tease</div><div><a href="https://instagram.com/triptease" target="_blank">Instagram</a> · <a href="https://open.spotify.com/search/Trip%20Tease" target="_blank">Spotify</a> · <a href="https://www.youtube.com/watch?v=P_VFdGwgbg0" target="_blank">YouTube</a></div></footer>
+</body>
+</html>
