@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Builder | Parallel Vision</title>
+  <style>
+    :root{
+      --bg:#f2dfcf;
+      --paper:#fffaf2;
+      --ink:#241915;
+      --muted:#7b6c61;
+      --line:#d9cdbf;
+      --accent:#2d1f19;
+      --soft:#f8f1e8;
+      --shadow:0 30px 90px rgba(55,35,25,.18);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 98% 92%, rgba(178,120,255,.42), transparent 28%),
+        radial-gradient(circle at 0% 100%, rgba(255,172,88,.40), transparent 35%),
+        linear-gradient(135deg,#f7e4cb,#fffdf8 40%,#f5d4e1 100%);
+      color:var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding:44px 18px;
+    }
+    .page{
+      max-width:1120px;
+      margin:0 auto;
+      background:rgba(255,250,242,.92);
+      border:1px solid rgba(90,70,52,.14);
+      border-radius:4px;
+      box-shadow:var(--shadow);
+      padding:64px 64px 54px;
+      backdrop-filter:blur(18px);
+    }
+    h1{
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight:400;
+      letter-spacing:-.07em;
+      font-size:clamp(64px,8vw,104px);
+      line-height:.86;
+      margin-bottom:24px;
+    }
+    .kicker{
+      text-transform:uppercase;
+      letter-spacing:.36em;
+      font-size:13px;
+      color:#6e584b;
+      font-weight:600;
+      margin-bottom:32px;
+    }
+    .rule{height:1px;background:var(--line);margin:0 0 32px}
+    .intro{
+      font-family: Georgia, serif;
+      font-size:22px;
+      color:#5d5149;
+      margin-bottom:44px;
+    }
+    label{display:block;font-family:Georgia,serif;font-size:19px;font-weight:600;margin-bottom:12px}
+    .required{color:#b0422a}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+    .field{margin-bottom:28px}
+    input, textarea{
+      width:100%;
+      border:1px solid #cfc0b0;
+      border-radius:10px;
+      background:#fffdf8;
+      min-height:58px;
+      padding:0 18px;
+      font-size:16px;
+      color:var(--ink);
+      outline:none;
+      transition:.25s ease;
+    }
+    textarea{padding:18px;min-height:120px;resize:vertical}
+    input:focus,textarea:focus{border-color:#2d1f19;box-shadow:0 0 0 3px rgba(45,31,25,.08)}
+    .section-label{
+      margin:42px 0 22px;
+      text-transform:uppercase;
+      letter-spacing:.34em;
+      font-size:13px;
+      font-weight:700;
+    }
+    .package{
+      position:relative;
+      display:grid;
+      grid-template-columns:44px 1fr 190px;
+      gap:26px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:34px 32px;
+      margin-bottom:24px;
+      background:rgba(255,253,248,.62);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+    .package:hover{transform:translateY(-2px);box-shadow:0 18px 60px rgba(55,35,25,.08)}
+    .package.selected{border:2px solid var(--accent);background:#fffdf8}
+    .radio{
+      width:28px;height:28px;border:1px solid #d4c6b9;border-radius:50%;margin-top:7px;position:relative;flex:0 0 auto;
+    }
+    .package.selected .radio:after{
+      content:"";position:absolute;inset:6px;background:var(--accent);border-radius:50%;
+    }
+    .package h2{
+      font-family:Georgia,serif;font-weight:400;letter-spacing:-.055em;font-size:42px;line-height:1;margin-bottom:15px;
+    }
+    .subtitle{text-transform:uppercase;letter-spacing:.28em;font-size:12px;font-weight:700;color:#765f51;line-height:1.8;max-width:390px;margin-bottom:22px}
+    .package-line{height:1px;background:var(--line);margin:18px 0 22px}
+    ul{columns:2;column-gap:70px;list-style-position:inside;font-family:Georgia,serif;font-size:17px;line-height:1.58;color:#30241f}
+    li{break-inside:avoid}
+    .price{text-align:right;font-family:Georgia,serif;font-size:42px;letter-spacing:-.06em;line-height:1;margin-top:6px;white-space:nowrap}
+    .currency{font-family:Inter,sans-serif;font-size:13px;letter-spacing:.28em;color:#8c7666;margin-left:5px}
+    .badge{position:absolute;top:30px;right:31px;background:#2d1f19;color:#fff;padding:8px 12px;border-radius:3px;text-transform:uppercase;letter-spacing:.24em;font-size:11px;font-weight:700}
+    .summary{
+      margin-top:36px;padding-top:28px;border-top:1px solid var(--line);
+      display:grid;grid-template-columns:1fr 1fr auto;gap:34px;align-items:end;
+    }
+    .summary small{display:block;text-transform:uppercase;letter-spacing:.34em;font-weight:700;color:#6d5b4d;margin-bottom:12px;font-size:11px}
+    .summary strong{font-family:Georgia,serif;font-size:30px;font-weight:400;letter-spacing:-.04em}
+    button{
+      border:0;background:#2d1f19;color:#fff;border-radius:4px;padding:20px 42px;font-family:Georgia,serif;font-size:20px;cursor:pointer;transition:.25s ease;box-shadow:0 12px 30px rgba(45,31,25,.18)
+    }
+    button:hover{transform:translateY(-2px);background:#1c120f}
+    .note{margin-top:28px;color:#77695f;font-size:13px;line-height:1.5}
+    @media(max-width:850px){
+      body{padding:0;background:var(--paper)}.page{padding:38px 22px;border-radius:0;box-shadow:none}.grid,.summary{grid-template-columns:1fr}.package{grid-template-columns:34px 1fr}.price{text-align:left;grid-column:2}.badge{position:static;width:max-content;margin-bottom:18px}ul{columns:1}h1{font-size:62px}.intro{font-size:19px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Website Builder</h1>
+    <div class="kicker">A timeless website designed to grow with your music.</div>
+    <div class="rule"></div>
+    <p class="intro">Editorial websites crafted for musicians, labels and creative studios.</p>
+
+    <form id="proposalForm" action="mailto:abletoncourseberlin@gmail.com" method="post" enctype="text/plain">
+      <div class="grid">
+        <div class="field"><label>First Name <span class="required">*</span></label><input name="First name" required placeholder="First Name"></div>
+        <div class="field"><label>Last Name</label><input name="Last name" placeholder="Last Name"></div>
+      </div>
+      <div class="field"><label>Email Address <span class="required">*</span></label><input type="email" name="Email" required placeholder="example@email.com"></div>
+      <div class="field"><label>Artist or Project Name <span class="required">*</span></label><input name="Artist / Project" required placeholder="e.g. Trip Tease, Parallel Vision, etc."></div>
+
+      <div class="section-label">Choose your website package <span class="required">*</span></div>
+
+      <div class="package" data-package="Website" data-price="800" onclick="selectPackage(this)">
+        <div class="radio"></div>
+        <div>
+          <h2>Website</h2>
+          <div class="subtitle">Everything you need to launch a beautiful artist website.</div>
+          <div class="package-line"></div>
+          <ul>
+            <li>Custom editorial website</li><li>Mobile responsive</li><li>Artist bio</li><li>Releases archive</li><li>Studio section</li><li>Spotify & YouTube integration</li><li>Contact page</li><li>Copy refinement</li><li>1 additional release</li><li>1 journal entry</li><li>One revision round</li>
+          </ul>
+        </div>
+        <div class="price">€800 <span class="currency">EUR</span></div>
+      </div>
+
+      <div class="package selected" data-package="Website + Ongoing Support" data-price="1200" onclick="selectPackage(this)">
+        <div class="radio"></div>
+        <div>
+          <div class="badge">Recommended</div>
+          <h2>Website + Ongoing Support</h2>
+          <div class="subtitle">Designed for artists who want an evolving website.</div>
+          <div class="package-line"></div>
+          <p class="subtitle" style="margin-bottom:16px;letter-spacing:.24em;">Includes everything above, plus:</p>
+          <ul>
+            <li>Website publishing</li><li>Domain connection</li><li>3 months of updates</li><li>New releases added</li><li>Journal updates</li><li>Section edits</li><li>Image and link updates</li><li>Priority support</li>
+          </ul>
+        </div>
+        <div class="price">€1,200 <span class="currency">EUR</span></div>
+      </div>
+
+      <input type="hidden" name="Selected package" id="selectedPackage" value="Website + Ongoing Support">
+      <input type="hidden" name="Estimated total" id="estimatedTotalHidden" value="€1,200 EUR">
+
+      <div class="field" style="margin-top:34px"><label>Notes</label><textarea name="Notes" placeholder="Share links, references, timeline or anything important."></textarea></div>
+
+      <div class="summary">
+        <div><small>Selected Package</small><strong id="selectedName">Website + Ongoing Support</strong></div>
+        <div><small>Estimated Total</small><strong id="selectedPrice">€1,200 <span class="currency">EUR</span></strong></div>
+        <button type="submit">Request Proposal →</button>
+      </div>
+      <p class="note">This form opens an email draft with the selected package. Replace the email address in the HTML with your preferred contact email.</p>
+    </form>
+  </main>
+  <script>
+    function selectPackage(el){
+      document.querySelectorAll('.package').forEach(p=>p.classList.remove('selected'));
+      el.classList.add('selected');
+      const name = el.dataset.package;
+      const price = Number(el.dataset.price).toLocaleString('en-US');
+      document.getElementById('selectedName').textContent = name;
+      document.getElementById('selectedPrice').innerHTML = `€${price} <span class="currency">EUR</span>`;
+      document.getElementById('selectedPackage').value = name;
+      document.getElementById('estimatedTotalHidden').value = `€${price} EUR`;
+    }
+  </script>
+</body>
+</html>
