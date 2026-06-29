@@ -6,168 +6,294 @@
 <title>Trip Tease</title>
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box}
 
-body {
-  background: #f7f4ef;
-  color: #151515;
-  font-family: Arial, Helvetica, sans-serif;
+html{scroll-behavior:smooth}
+
+body{
+  background:#f7f4ef;
+  color:#151515;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-a { color: inherit; text-decoration: none; }
+a{color:inherit;text-decoration:none}
 
-header {
-  padding: 28px 6vw;
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:99;
+  padding:26px 6vw;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(247,244,239,.82);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
 }
 
-nav a { margin-left: 24px; opacity: .55; }
-nav a:hover { opacity: 1; }
+nav a{margin-left:24px;opacity:.55}
+nav a:hover{opacity:1}
 
-.hero {
-  min-height: 88vh;
-  padding: 6vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6vw;
-  align-items: center;
+.hero{
+  min-height:100vh;
+  padding:120px 6vw 70px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6vw;
+  align-items:center;
 }
 
-h1 {
-  font-family: Georgia, serif;
-  font-size: clamp(60px, 10vw, 150px);
-  font-weight: 400;
-  letter-spacing: -0.08em;
-  line-height: .85;
+h1{
+  font-family:Georgia,serif;
+  font-size:clamp(68px,10vw,160px);
+  font-weight:400;
+  letter-spacing:-.08em;
+  line-height:.82;
 }
 
-.hero p {
-  margin-top: 28px;
-  max-width: 430px;
-  color: #555;
-  font-size: 17px;
+.hero p{
+  margin-top:28px;
+  max-width:430px;
+  color:#555;
+  font-size:17px;
 }
 
-.polaroid {
-  background: white;
-  padding: 14px 14px 54px;
-  box-shadow: 0 25px 80px rgba(0,0,0,.14);
-  transform: rotate(-2deg);
+.polaroid{
+  background:white;
+  padding:14px 14px 54px;
+  box-shadow:0 25px 80px rgba(0,0,0,.14);
+  transform:rotate(-2deg);
 }
 
-.polaroid img {
-  width: 100%;
-  height: 560px;
-  object-fit: cover;
-  filter: contrast(.93) saturate(.78) sepia(.12);
+.polaroid img{
+  width:100%;
+  height:560px;
+  object-fit:cover;
+  filter:contrast(.93) saturate(.78) sepia(.12);
 }
 
-.caption {
-  margin-top: 15px;
-  font-family: Georgia, serif;
-  color: #777;
-  font-size: 14px;
+.caption{
+  margin-top:15px;
+  font-family:Georgia,serif;
+  color:#777;
+  font-size:14px;
 }
 
-section {
-  padding: 90px 6vw;
-  border-top: 1px solid rgba(0,0,0,.08);
+section{
+  padding:95px 6vw;
+  border-top:1px solid rgba(0,0,0,.08);
 }
 
-.section-title {
-  margin-bottom: 38px;
-  font-size: 12px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #777;
+.section-title{
+  margin-bottom:38px;
+  font-size:12px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#777;
 }
 
-.releases {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+.releases{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
 }
 
-.release {
-  background: #fff;
-  padding: 12px 12px 22px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.06);
-  transition: transform .3s ease;
+.release{
+  background:#fff;
+  padding:12px 12px 22px;
+  box-shadow:0 12px 35px rgba(0,0,0,.06);
+  transition:transform .3s ease;
 }
 
-.release:hover { transform: translateY(-6px); }
+.release:hover{transform:translateY(-6px)}
 
-.release img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  filter: contrast(.95) saturate(.85);
+.release img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  filter:contrast(.95) saturate(.85);
 }
 
-.release h3 {
-  margin-top: 16px;
-  font-family: Georgia, serif;
-  font-size: 22px;
-  font-weight: 400;
+.release h3{
+  margin-top:16px;
+  font-family:Georgia,serif;
+  font-size:24px;
+  font-weight:400;
+  letter-spacing:-.04em;
 }
 
-.release p {
-  margin-top: 6px;
-  font-size: 13px;
-  color: #777;
-  line-height: 1.45;
+.release p{
+  margin-top:8px;
+  font-size:13px;
+  color:#777;
+  line-height:1.45;
 }
 
-.studio {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 50px;
-  align-items: center;
+.story{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:70px;
+  align-items:center;
+  margin-bottom:110px;
 }
 
-.studio img {
-  width: 100%;
-  height: 540px;
-  object-fit: cover;
-  filter: grayscale(.15) contrast(.9) sepia(.18);
+.story:last-child{margin-bottom:0}
+
+.story-reverse{grid-template-columns:1.1fr .9fr}
+.story-reverse .story-image{order:2}
+
+.story-image{
+  background:#fff;
+  padding:14px 14px 50px;
+  box-shadow:0 30px 80px rgba(0,0,0,.10);
+  transform:rotate(-1deg);
 }
 
-.studio-text {
-  font-family: Georgia, serif;
-  font-size: clamp(30px, 4vw, 58px);
-  line-height: 1;
-  letter-spacing: -0.05em;
+.story-reverse .story-image{transform:rotate(1.5deg)}
+
+.story-image img{
+  width:100%;
+  display:block;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  filter:contrast(.95) saturate(.88) sepia(.08);
 }
 
-.about {
-  max-width: 800px;
-  font-family: Georgia, serif;
-  font-size: clamp(28px, 4vw, 52px);
-  line-height: 1.08;
-  letter-spacing: -0.05em;
+.eyebrow{
+  display:block;
+  margin-bottom:22px;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#888;
 }
 
-footer {
-  padding: 60px 6vw;
-  display: flex;
-  justify-content: space-between;
-  color: #777;
-  font-size: 13px;
+.story-text h2,
+.film-text h2{
+  font-family:Georgia,serif;
+  font-size:clamp(48px,7vw,110px);
+  font-weight:400;
+  line-height:.85;
+  letter-spacing:-.07em;
+  margin-bottom:32px;
 }
 
-@media (max-width: 900px) {
-  .hero, .studio { grid-template-columns: 1fr; }
-  .releases { grid-template-columns: 1fr 1fr; }
-  .polaroid img, .studio img { height: 420px; }
+.story-text p,
+.film-text p{
+  max-width:700px;
+  margin-bottom:20px;
+  font-family:Georgia,serif;
+  font-size:clamp(19px,1.7vw,27px);
+  line-height:1.18;
+  color:#333;
 }
 
-@media (max-width: 600px) {
-  .releases { grid-template-columns: 1fr; }
-  nav a { margin-left: 12px; }
+.story-links{
+  margin-top:34px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.story-links a,
+.watch-button{
+  border:1px solid rgba(0,0,0,.18);
+  padding:12px 18px;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  background:#fff;
+  display:inline-block;
+}
+
+.story-links a:hover,
+.watch-button:hover{
+  background:#151515;
+  color:#fff;
+}
+
+.film-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:70px;
+  align-items:center;
+  margin-top:40px;
+}
+
+.film-video{
+  box-shadow:0 35px 90px rgba(0,0,0,.12);
+  overflow:hidden;
+  background:#000;
+  transform:rotate(.6deg);
+}
+
+.film-video iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  border:none;
+  display:block;
+}
+
+.watch-button{margin-top:25px}
+
+.studio{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:50px;
+  align-items:center;
+}
+
+.studio img{
+  width:100%;
+  height:540px;
+  object-fit:cover;
+  filter:grayscale(.15) contrast(.9) sepia(.18);
+}
+
+.studio-text{
+  font-family:Georgia,serif;
+  font-size:clamp(30px,4vw,58px);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+
+.about{
+  max-width:850px;
+  font-family:Georgia,serif;
+  font-size:clamp(30px,4vw,56px);
+  line-height:1.08;
+  letter-spacing:-.05em;
+}
+
+footer{
+  padding:60px 6vw;
+  display:flex;
+  justify-content:space-between;
+  color:#777;
+  font-size:13px;
+  border-top:1px solid rgba(0,0,0,.08);
+}
+
+@media(max-width:900px){
+  header{padding:22px 5vw}
+  nav a{margin-left:12px}
+  .hero,.story,.story-reverse,.film-grid,.studio{grid-template-columns:1fr}
+  .story-reverse .story-image{order:0}
+  .releases{grid-template-columns:1fr 1fr}
+  .polaroid img,.studio img{height:420px}
+}
+
+@media(max-width:600px){
+  header{font-size:10px}
+  nav a{margin-left:8px}
+  .releases{grid-template-columns:1fr}
+  section{padding:75px 5vw}
 }
 </style>
 </head>
@@ -178,6 +304,8 @@ footer {
   <a href="#">Trip Tease</a>
   <nav>
     <a href="#releases">Releases</a>
+    <a href="#world">World</a>
+    <a href="#film">Film</a>
     <a href="#studio">Studio</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -234,6 +362,113 @@ footer {
       <p>Kris Berle & Trip Tease<br>clipp.art · CLIPP197 · 2021</p>
     </div>
 
+  </div>
+</section>
+
+<section id="world">
+  <div class="section-title">World</div>
+
+  <article class="story">
+    <div class="story-image">
+      <img src="artsexhavingdisco2.jpeg" alt="Sex Having Disco Pt. 2 artwork">
+    </div>
+
+    <div class="story-text">
+      <span class="eyebrow">Astrolead Recordings · 2025</span>
+      <h2>Sex Having Disco</h2>
+
+      <p>
+        Somewhere between a neon postcard, a forgotten beach club and a machine dreaming in Italian,
+        <em>Sex Having Disco</em> feels like Trip Tease and Alain Vice building their own private mythology
+        of the dancefloor.
+      </p>
+
+      <p>
+        The release moves through Italo disco, synth wave, cosmic electronics and late-night club romance
+        without becoming nostalgic theatre. It feels more like a memory of the future: warm basslines,
+        shiny synths, soft danger and that strange glamour of dancing at the edge of the night.
+      </p>
+
+      <p>
+        Pt. 2 opens the world further with <em>Milano 2098</em>, featuring Lubó, and a Prins Thomas Diskomiks
+        that stretches the fantasy into a longer, more interstellar trip.
+      </p>
+
+      <div class="story-links">
+        <a href="https://open.spotify.com/intl-es/album/4TMAFHfvDMwZs7tq2tMowe?si=KtAW1yx4TcmApSN4kimn3A" target="_blank">Listen Pt. 1</a>
+        <a href="https://open.spotify.com/intl-es/album/4rnX2LBMpAH0oBVDUPfdaW?si=M8v-VuHsQo-7EVE3CfrKsw" target="_blank">Listen Pt. 2</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="story story-reverse">
+    <div class="story-image">
+      <img src="mirrorsrelease.jpg" alt="MIRRORS REMIXED artwork">
+    </div>
+
+    <div class="story-text">
+      <span class="eyebrow">Ninja Tune · 2022</span>
+      <h2>Home Calling</h2>
+
+      <p>
+        Trip Tease’s remix of DJ Seinfeld’s <em>Home Calling</em> sits inside one of the most elegant remix
+        universes of recent electronic music: <em>MIRRORS (REMIXED)</em>, released by Ninja Tune.
+      </p>
+
+      <p>
+        The original <em>Mirrors</em> era marked a brighter turn in DJ Seinfeld’s world: less fog, more emotional
+        clarity, bigger melodies and a polished kind of club euphoria. In that context, Trip Tease’s version
+        feels perfectly placed. It does not try to overpower the original. It opens another room inside it.
+      </p>
+
+      <p>
+        The remix carries the emotional architecture of Seinfeld’s world but gives it a romantic, late-night
+        pulse: deep, warm, slightly euphoric, with the feeling of walking home after something important happened.
+      </p>
+
+      <div class="story-links">
+        <a href="https://open.spotify.com/search/DJ%20Seinfeld%20Home%20Calling%20Trip%20Tease%20Remix" target="_blank">Listen on Spotify</a>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="film">
+  <div class="section-title">Film</div>
+
+  <div class="film-grid">
+    <div class="film-text">
+      <span class="eyebrow">CLIPP.ART · VISUAL COLLABORATION</span>
+
+      <h2>Un, Deux, Trois</h2>
+
+      <p>
+        Some songs do not ask for a music video. They ask for another dimension.
+      </p>
+
+      <p>
+        Created with artist Kris Berle, <em>Un, Deux, Trois</em> expands the visual language surrounding
+        Trip Tease into something suspended between dream logic and animation. Strange landscapes,
+        impossible movements and abstract characters become another instrument, extending the emotional
+        world of the music rather than illustrating it.
+      </p>
+
+      <p>
+        It is less a narrative than a visual state of mind, somewhere between surreal cinema,
+        contemporary illustration and electronic hallucination.
+      </p>
+
+      <a class="watch-button" href="https://www.youtube.com/watch?v=P_VFdGwgbg0" target="_blank">Watch Film</a>
+    </div>
+
+    <div class="film-video">
+      <iframe
+        src="https://www.youtube.com/embed/P_VFdGwgbg0"
+        title="Un, Deux, Trois"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 </section>
 
