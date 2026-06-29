@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trip Tease | Editorial White</title>
+<style>
+:root{
+  --paper:#fbfaf6;
+  --ink:#111;
+  --muted:#6f6a62;
+  --line:#ded9cf;
+  --soft:#f2eee7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:1000;
+  opacity:.035;
+  background-image:radial-gradient(#000 1px,transparent 1px);
+  background-size:4px 4px;
+}
+
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:90;
+  height:58px;padding:0 42px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(251,250,246,.84);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+}
+nav{display:flex;gap:28px;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+
+main{padding-top:58px}
+.section{border-bottom:1px solid var(--line)}
+.label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.serif{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.06em;line-height:.88}
+
+.hero{
+  min-height:calc(100vh - 58px);
+  display:grid;grid-template-columns:42% 58%;
+}
+.hero-copy{
+  padding:9vw 5vw 6vw;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid var(--line);
+}
+.hero h1{font-size:clamp(82px,12vw,188px)}
+.hero p{
+  margin-top:30px;max-width:390px;
+  font-family:Georgia,serif;font-size:22px;line-height:1.05;letter-spacing:-.03em;
+}
+.enter{margin-top:40px;display:inline-flex;gap:18px;align-items:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:6px;width:max-content}
+.hero-image{
+  padding:5vw;display:grid;place-items:center;background:linear-gradient(135deg,#fff 0%,#f7f2e9 100%);
+}
+.hero-frame{width:min(740px,90%);background:#fff;padding:18px 18px 52px;box-shadow:0 35px 90px rgba(0,0,0,.12);transform:rotate(-1.5deg)}
+.hero-frame img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#000}
+.caption{margin-top:14px;font-family:Georgia,serif;font-size:14px;color:var(--muted)}
+
+.release-strip{padding:60px 42px}
+.release-grid{margin-top:28px;display:grid;grid-template-columns:repeat(5,1fr);gap:22px}
+.release img{aspect-ratio:1/1;object-fit:cover;margin-bottom:14px}
+.release h3{font-family:Georgia,serif;font-size:24px;font-weight:400;letter-spacing:-.05em;line-height:.95}
+.release p{margin-top:7px;font-size:12px;line-height:1.35;color:var(--muted)}
+
+.split-story{display:grid;grid-template-columns:1fr 1fr;min-height:720px}
+.split-story>div{padding:70px 5vw}
+.split-story .visual{border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:#fffdf9}
+.art-object{width:min(480px,92%)}
+.art-object img{width:100%;aspect-ratio:1/1;object-fit:cover;box-shadow:0 22px 60px rgba(0,0,0,.08)}
+.text-object{display:flex;flex-direction:column;justify-content:center}
+.text-object h2{font-size:clamp(58px,7vw,120px);margin:22px 0 30px}
+.text-object p{font-family:Georgia,serif;font-size:24px;line-height:1.12;letter-spacing:-.035em;max-width:650px;margin-bottom:22px;color:#24211d}
+.links{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px}
+.links a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:6px}
+
+.film{padding:72px 42px;display:grid;grid-template-columns:32% 68%;gap:50px;align-items:end}
+.film h2{font-size:clamp(54px,7vw,110px);margin:22px 0}
+.film p{font-family:Georgia,serif;font-size:21px;line-height:1.15;letter-spacing:-.03em;max-width:380px;color:#292620}
+.video{background:#000;box-shadow:0 30px 80px rgba(0,0,0,.12)}
+.video iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+
+.studio{padding:72px 42px;display:grid;grid-template-columns:52% 48%;gap:52px;align-items:center;background:#fffdf8}
+.studio img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.studio h2,.bio h2{font-size:clamp(48px,6vw,92px);margin:18px 0 26px}
+.studio p,.bio p{font-family:Georgia,serif;font-size:22px;line-height:1.18;letter-spacing:-.03em;color:#2b2822;max-width:650px;margin-bottom:18px}
+.note{margin-top:28px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+.bio{padding:72px 42px;display:grid;grid-template-columns:34% 66%;gap:52px;align-items:center}
+.bio-photo{background:#fff;padding:14px;box-shadow:0 22px 70px rgba(0,0,0,.08)}
+.bio-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(1) contrast(.92)}
+
+footer{padding:44px 42px;display:flex;justify-content:space-between;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+
+@media(max-width:950px){
+  header{padding:0 22px;overflow:auto}nav{gap:16px}
+  .hero,.split-story,.film,.studio,.bio{grid-template-columns:1fr}
+  .hero-copy{border-right:0;border-bottom:1px solid var(--line);min-height:70vh}
+  .release-grid{grid-template-columns:repeat(2,1fr)}
+  .split-story .visual{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media(max-width:600px){
+  header{font-size:9px;gap:18px}nav{gap:12px}
+  .release-grid{grid-template-columns:1fr}
+  .release-strip,.film,.studio,.bio{padding:52px 22px}
+  .split-story>div{padding:52px 22px}
+}
+</style>
+</head>
+<body>
+<header>
+  <a href="#top">Trip Tease</a>
+  <nav>
+    <a href="#releases">Releases</a>
+    <a href="#world">World</a>
+    <a href="#film">Film</a>
+    <a href="#studio">Studio</a>
+    <a href="#bio">Bio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero section">
+    <div class="hero-copy">
+      <div>
+        <div class="label">Romantic electronics</div>
+        <h1 class="serif">Trip<br>Tease</h1>
+        <p>Sounds from intimate club moments, nostalgic machines and dream states. Made for late nights, long drives and rooms with the curtains half open.</p>
+        <a class="enter" href="#world">Enter the world <span>↓</span></a>
+      </div>
+      <div class="note">Mexico City · La Roma · private archive</div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-frame">
+        <img src="artjaguar.png" alt="Trip Tease Jaguar artwork">
+        <div class="caption">Private archive, television light, soft danger.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="releases" class="release-strip section">
+    <div class="label">Selected releases</div>
+    <div class="release-grid">
+      <article class="release"><img src="artjaguar.png" alt="Jaguar"><h3>Jaguar</h3><p>Trip Tease<br>clipp.art · CLIPP257 · 2026</p></article>
+      <article class="release"><img src="artsexhavingdisco.jpg" alt="Sex Having Disco"><h3>Sex Having Disco</h3><p>Trip Tease & Alain Vice<br>Astrolead · AR121 · 2025</p></article>
+      <article class="release"><img src="artsexhavingdisco2.jpeg" alt="Sex Having Disco Pt. 2"><h3>Sex Having Disco, Pt. 2</h3><p>Trip Tease & Alain Vice feat. Lubó<br>Astrolead · AR125 digital · 2025</p></article>
+      <article class="release"><img src="mirrorsrelease.jpg" alt="MIRRORS REMIXED"><h3>MIRRORS (REMIXED)</h3><p>DJ Seinfeld · Trip Tease Remix<br>Ninja Tune · 2022</p></article>
+      <article class="release"><img src="shadesart.jpg" alt="Shades"><h3>Shades</h3><p>Kris Berle & Trip Tease<br>clipp.art · CLIPP197 · 2021</p></article>
+    </div>
+  </section>
+
+  <section id="world" class="split-story section">
+    <div class="visual"><div class="art-object"><img src="artsexhavingdisco2.jpeg" alt="Sex Having Disco Pt. 2"></div></div>
+    <div class="text-object">
+      <div class="label">Astrolead Recordings · 2025</div>
+      <h2 class="serif">Sex Having Disco</h2>
+      <p>Somewhere between a neon postcard, a forgotten beach club and a machine dreaming in Italian, Sex Having Disco feels like Trip Tease and Alain Vice building their own private mythology of the dancefloor.</p>
+      <p>Pt. 2 opens the world further with Milano 2098, featuring Lubó, and a Prins Thomas Diskomiks that stretches the fantasy into a longer, more interstellar trip.</p>
+      <div class="links">
+        <a href="https://open.spotify.com/intl-es/album/4TMAFHfvDMwZs7tq2tMowe?si=KtAW1yx4TcmApSN4kimn3A" target="_blank">Listen Pt. 1</a>
+        <a href="https://open.spotify.com/intl-es/album/4rnX2LBMpAH0oBVDUPfdaW?si=M8v-VuHsQo-7EVE3CfrKsw" target="_blank">Listen Pt. 2</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-story section">
+    <div class="visual"><div class="art-object"><img src="mirrorsrelease.jpg" alt="MIRRORS REMIXED"></div></div>
+    <div class="text-object">
+      <div class="label">Ninja Tune · 2022</div>
+      <h2 class="serif">Home Calling</h2>
+      <p>Trip Tease’s remix of DJ Seinfeld’s Home Calling sits inside one of the most elegant remix universes of recent electronic music: MIRRORS (REMIXED), released by Ninja Tune.</p>
+      <p>The remix carries the emotional architecture of Seinfeld’s world but gives it a romantic, late-night pulse: deep, warm, slightly euphoric, with the feeling of walking home after something important happened.</p>
+      <div class="links"><a href="https://open.spotify.com/search/DJ%20Seinfeld%20Home%20Calling%20Trip%20Tease%20Remix" target="_blank">Listen on Spotify</a></div>
+    </div>
+  </section>
+
+  <section id="film" class="film section">
+    <div>
+      <div class="label">CLIPP.ART · visual collaboration</div>
+      <h2 class="serif">Un, Deux, Trois</h2>
+      <p>A visual collaboration with artist Kris Berle. Surreal animations and abstract landscapes that expand the Trip Tease universe into another dimension.</p>
+      <div class="links"><a href="https://www.youtube.com/watch?v=P_VFdGwgbg0" target="_blank">Watch on YouTube</a></div>
+    </div>
+    <div class="video"><iframe src="https://www.youtube.com/embed/P_VFdGwgbg0" title="Un, Deux, Trois" allowfullscreen></iframe></div>
+  </section>
+
+  <section id="studio" class="studio section">
+    <img src="studiomex.JPG" alt="Trip Tease studio in Mexico City">
+    <div>
+      <div class="label">Studio</div>
+      <h2 class="serif">The Studio</h2>
+      <p>Trip Tease has collected synthesizers for more than two decades. Today his studio in Roma, Mexico City houses around one hundred different synths and vintage machines.</p>
+      <p>Some Saturdays, the doors open for public jams where up to sixty people create music together at the same time. No ego. Just machines, curiosity and collective energy.</p>
+      <div class="note">La Roma · synth rituals · open jams</div>
+    </div>
+  </section>
+
+  <section id="bio" class="bio section">
+    <div class="bio-photo"><img src="carlossalame.JPG" alt="Carlos Salame"></div>
+    <div>
+      <div class="label">Bio</div>
+      <h2 class="serif">Carlos Salame</h2>
+      <p>Carlos Salame is Trip Tease: producer, DJ and curator from Mexico City. His music moves between electronic, disco, lo-fi and cinematic textures.</p>
+      <p>His work appears through labels such as clipp.art, Astrolead Recordings and Ninja Tune remix projects, building spaces where music feels intimate, human and alive.</p>
+      <p>Collector of synthesizers, host of studio jams and obsessive builder of atmospheres, Trip Tease is both a music project and a world.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div>© Trip Tease</div>
+  <div><a href="https://instagram.com/triptease" target="_blank">Instagram</a> · <a href="#">Spotify</a> · <a href="#">SoundCloud</a></div>
+</footer>
+</body>
+</html>
